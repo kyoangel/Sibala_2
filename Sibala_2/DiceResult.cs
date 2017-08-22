@@ -11,11 +11,11 @@ namespace Sibala_2
 
     public class DiceResult
     {
-        public int Points { get; set; }
+        //public int Points { get; set; }
 
-        public DiceType Type { get; set; }
+        //public DiceType Type { get; set; }
 
-        public int MaxPoint { get; set; }
+        //public int MaxPoint { get; set; }
 
         private Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
         {
@@ -29,26 +29,23 @@ namespace Sibala_2
 
         public int Compare(Dice dice1, Dice dice2)
         {
-            DiceResult result1 = dice1.GetResult();
-            DiceResult result2 = dice2.GetResult();
-
-            if (result1.Type == result2.Type)
+            if (dice1.Type == dice2.Type)
             {
-                if (result1.Type == DiceType.Same)
+                if (dice1.Type == DiceType.Same)
                 {
-                    var weightOfDice1 = SamePointWeight[result1.Points];
-                    var weightOfDice2 = SamePointWeight[result2.Points];
+                    var weightOfDice1 = SamePointWeight[dice1.Points];
+                    var weightOfDice2 = SamePointWeight[dice2.Points];
 
                     return weightOfDice1 - weightOfDice2;
                 }
-                else if (result1.Type == DiceType.Points)
+                else if (dice1.Type == DiceType.Points)
                 {
-                    if (result1.Points == result2.Points)
+                    if (dice1.Points == dice2.Points)
                     {
-                        return result1.MaxPoint - result2.MaxPoint;
+                        return dice1.MaxPoint - dice2.MaxPoint;
                     }
 
-                    return result1.Points - result2.Points;
+                    return dice1.Points - dice2.Points;
                 }
                 else
                 {
@@ -57,7 +54,7 @@ namespace Sibala_2
             }
             else
             {
-                return (int)result1.Type - (int)result2.Type;
+                return (int)dice1.Type - (int)dice2.Type;
             }
         }
     }

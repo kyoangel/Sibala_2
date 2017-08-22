@@ -10,69 +10,80 @@ namespace Sibala_2
         public Dice(int[] inputString)
         {
             DiceList = inputString.ToList();
+            this.Calculate();
         }
 
-        internal string Calculate()
+        public int MaxPoint { get; set; }
+
+        public int Points { get; set; }
+
+        public DiceType Type { get; set; }
+
+        private void Calculate()
         {
-            var result = GetResult();
+            SetResult();
 
             var diceCount = DiceList.GroupBy(x => x).Count();
 
-            if (result.Type == DiceType.Points)
+            if (this.Type == DiceType.Points)
             {
-                if (result.Points == 12) return "18La";
-                if (result.Points == 3) return "BG";
-                return result.Points + "Point";
+                if (this.Points == 12)
+                {
+                    this.Output = "18La";
+                }
+                else if (this.Points == 3)
+                {
+                    this.Output = "BG";
+                }
+                else
+                {
+                    this.Output = this.Points + "Point";
+                }
             }
-            return result.Type.ToString();
+            else
+            {
+                this.Output = this.Type.ToString();
+            }
         }
 
-        internal DiceResult GetResult()
+        public string Output { get; set; }
+
+        internal void SetResult()
         {
             var diceCount = DiceList.GroupBy(x => x).Count();
-            var points = 0;
             switch (diceCount)
             {
                 case 1:
-                    return new DiceResult
-                    {
-                        Type = DiceType.Same,
-                        Points = DiceList.Sum(),
-                        MaxPoint = DiceList.Sum() / 4
-                    };
+                    this.Type = DiceType.Same;
+                    this.Points = DiceList.Sum();
+                    this.MaxPoint = DiceList.Sum() / 4;
+                    break;
 
                 case 2:
                     if (DiceList.GroupBy(x => x).Max(x => x.Count()) == 3)
                     {
-                        return new DiceResult
-                        {
-                            Type = DiceType.NoPoint,
-                            Points = 0
-                        };
+                        this.Type = DiceType.NoPoint;
+                        this.Points = 0;
                     }
-                    points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2;
-                    return new DiceResult
+                    else
                     {
-                        Type = DiceType.Points,
-                        Points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2,
-                        MaxPoint = DiceList.Max()
-                    };
+                        this.Type = DiceType.Points;
+                        this.Points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2;
+                        MaxPoint = DiceList.Max();
+                    }
+
+                    break;
 
                 case 3:
-                    points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
-                    return new DiceResult
-                    {
-                        Type = DiceType.Points,
-                        Points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key),
-                        MaxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key)
-                    };
+                    this.Type = DiceType.Points;
+                    this.Points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
+                    this.MaxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key);
+                    break;
 
                 default:
-                    return new DiceResult
-                    {
-                        Type = DiceType.NoPoint,
-                        Points = 0
-                    };
+                    this.Type = DiceType.NoPoint;
+                    Points = 0;
+                    break;
             }
         }
     }
