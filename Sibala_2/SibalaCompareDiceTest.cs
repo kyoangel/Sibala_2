@@ -5,8 +5,9 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Sibala_2
 {
-    [TestFixture()]
-    public class UnitTest1
+
+    [TestClass]
+    public class SibalaCompareDiceTest
     {
         [Test]
         public void Test_Same_24_BiggerThan_Same_20()
@@ -38,7 +39,8 @@ namespace Sibala_2
             CompareDice(new int[] { 3, 3, 1, 2 }, new int[] { 1, 2, 3, 4 }, 1);
         }
 
-        [Test]
+
+        [TestMethod]
         public void Test_same_1_biggerthan_same_4()
         {
             CompareDice(new int[] { 1, 1, 1, 1 }, new int[] { 4, 4, 4, 4 }, 1);
@@ -47,14 +49,13 @@ namespace Sibala_2
         [Test]
         public void Test_points_6_biggerThan_points_6()
         {
-            CompareDice(new int[] { 1, 1, 5, 1 }, new int[] { 4, 4, 4, 2 }, 1);
+            CompareDice(new int[] { 1, 1, 5, 1 }, new int[] { 4, 4, 4, 2 }, 0);
         }
 
         private void CompareDice(int[] d1, int[] d2, int expect)
         {
-            DiceResult diceResult = new DiceResult();
-
-            int result = diceResult.Compare(new Dice(d1), new Dice(d2));
+            var helper = new DiceCompare();
+            int result = helper.Compare(new Dice(d1), new Dice(d2));
             Assert.AreEqual(expect, result);
         }
     }
