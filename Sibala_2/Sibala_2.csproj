@@ -56,13 +56,13 @@
   <ItemGroup>
     <Compile Include="DiceComparer.cs" />
     <Compile Include="Dice.cs" />
-    <Compile Include="NoPointDiceResultHandler.cs" />
-    <Compile Include="NoPointResultComparer.cs" />
-    <Compile Include="PointsDiceResultHandler.cs" />
-    <Compile Include="PointsResultComparer.cs" />
+    <Compile Include="DiceResultHandlers\NoPointDiceResultHandler.cs" />
+    <Compile Include="DiceResultHandlers\PointsDiceResultHandler.cs" />
+    <Compile Include="DiceResultHandlers\SameDiceResultHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SameDiceResultHandler.cs" />
-    <Compile Include="SameResultComparer.cs" />
+    <Compile Include="SameTypeResultComparers\NoPointResultComparer.cs" />
+    <Compile Include="SameTypeResultComparers\PointsResultComparer.cs" />
+    <Compile Include="SameTypeResultComparers\SameResultComparer.cs" />
     <Compile Include="SibalaTests.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>

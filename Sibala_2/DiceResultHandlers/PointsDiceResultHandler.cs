@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 
-namespace Sibala_2
+namespace Sibala_2.DiceResultHandlers
 {
     internal class PointsDiceResultHandler : IDiceResultHandler
     {

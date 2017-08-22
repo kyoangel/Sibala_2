@@ -1,4 +1,4 @@
-﻿namespace Sibala_2
+﻿namespace Sibala_2.DiceResultHandlers
 {
     internal class NoPointDiceResultHandler : IDiceResultHandler
     {

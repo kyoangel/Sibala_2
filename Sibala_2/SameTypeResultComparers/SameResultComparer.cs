@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Sibala_2
+namespace Sibala_2.SameTypeResultComparers
 {
     public class SameResultComparer : IComparer<Dice>
     {
