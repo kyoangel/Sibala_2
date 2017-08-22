@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Sibala_2
 {
@@ -12,8 +8,6 @@ namespace Sibala_2
         Points = 1,
         NoPoint = 0
     }
-
-
 
     public class DiceResult
     {
@@ -64,9 +58,6 @@ namespace Sibala_2
                 else
                     return -1;
             }
-            return -2;
         }
-
-
     }
 }
