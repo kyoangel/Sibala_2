@@ -41,7 +41,7 @@ namespace Sibala_2
 
             var actualResult = dice.GetResult();
 
-            return actualResult.maxPoint;
+            return actualResult.MaxPoint;
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Sibala_2
 
     public class DiceResult
     {
-        public int points { get; set; }
-        public DiceType type { get; set; }
-        public int maxPoint { get; set; }
+        public int Points { get; set; }
+        public DiceType Type { get; set; }
+        public int MaxPoint { get; set; }
 
         public Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
         {
@@ -30,28 +30,28 @@ namespace Sibala_2
             DiceResult result1 = dice1.GetResult();
             DiceResult result2 = dice2.GetResult();
 
-            if (result1.type == result2.type)
+            if (result1.Type == result2.Type)
             {
-                if (result1.type == DiceType.Same)
+                if (result1.Type == DiceType.Same)
                 {
-                    var weightOfDice1 = SamePointWeight[result1.points];
-                    var weightOfDice2 = SamePointWeight[result2.points];
+                    var weightOfDice1 = SamePointWeight[result1.Points];
+                    var weightOfDice2 = SamePointWeight[result2.Points];
 
                     return weightOfDice1 - weightOfDice2;
                 }
 
-                if (result1.points > result2.points)
+                if (result1.Points > result2.Points)
                     return 1;
-                else if (result1.points == result2.points)
+                else if (result1.Points == result2.Points)
                 {
-                    return result1.maxPoint > result2.maxPoint ? 1 : result1.maxPoint == result2.maxPoint ? 0 : -1;
+                    return result1.MaxPoint > result2.MaxPoint ? 1 : result1.MaxPoint == result2.MaxPoint ? 0 : -1;
                 }
                 else
                     return -1;
             }
             else
             {
-                return (int) result1.type - (int) result2.type;
+                return (int)result1.Type - (int)result2.Type;
             }
         }
     }
