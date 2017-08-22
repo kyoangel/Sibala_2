@@ -11,10 +11,10 @@ namespace Sibala_2
     public class SibalaTests
     {
         [Test]
-        [TestCase("1,2,3,4", ExpectedResult = "NoPoint")]
-        public string BasicTest(string inputString)
+        [TestCase(new[] { 1, 2, 3, 4 }, ExpectedResult = "NoPoint")]
+        public string BasicTest(int[] dices)
         {
-            var dice = new Dice(inputString);
+            var dice = new Dice(dices);
 
             var actualResult = dice.calculat();
 

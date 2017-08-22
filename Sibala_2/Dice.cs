@@ -8,16 +8,21 @@ namespace Sibala_2
 {
     public class Dice
     {
-        private string inputString;
+        private List<int> DiceList;
 
-        public Dice(string inputString)
+        public Dice(int[] inputString)
         {
-            this.inputString = inputString;
+            DiceList = inputString.ToList();
         }
 
         internal string calculat()
         {
             return "NoPoint";
+        }
+
+        internal DiceResult GetResult()
+        {
+            return new DiceResult();
         }
     }
 }
