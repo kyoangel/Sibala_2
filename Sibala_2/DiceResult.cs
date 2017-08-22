@@ -12,10 +12,12 @@ namespace Sibala_2
     public class DiceResult
     {
         public int Points { get; set; }
+
         public DiceType Type { get; set; }
+
         public int MaxPoint { get; set; }
 
-        public Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
+        private Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
         {
             { 4,6},
             { 16,5},
@@ -39,15 +41,19 @@ namespace Sibala_2
 
                     return weightOfDice1 - weightOfDice2;
                 }
-
-                if (result1.Points > result2.Points)
-                    return 1;
-                else if (result1.Points == result2.Points)
+                else if (result1.Type == DiceType.Points)
                 {
-                    return result1.MaxPoint > result2.MaxPoint ? 1 : result1.MaxPoint == result2.MaxPoint ? 0 : -1;
+                    if (result1.Points == result2.Points)
+                    {
+                        return result1.MaxPoint - result2.MaxPoint;
+                    }
+
+                    return result1.Points - result2.Points;
                 }
                 else
-                    return -1;
+                {
+                    return 0;
+                }
             }
             else
             {
