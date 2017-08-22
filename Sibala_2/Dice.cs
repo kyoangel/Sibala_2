@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sibala_2
 {
@@ -17,6 +14,11 @@ namespace Sibala_2
 
         internal string calculat()
         {
+            if (DiceList.GroupBy(x => x).Count() == 1)
+            {
+                return "Same";
+            }
+
             return "NoPoint";
         }
 

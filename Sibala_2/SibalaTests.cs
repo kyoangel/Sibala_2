@@ -12,6 +12,8 @@ namespace Sibala_2
     {
         [Test]
         [TestCase(new[] { 1, 2, 3, 4 }, ExpectedResult = "NoPoint")]
+        [TestCase(new[] { 1, 1, 1, 1 }, ExpectedResult = "Same")]
+        [TestCase(new[] { 2, 2, 3, 4 }, ExpectedResult = "7Point")]
         public string BasicTest(int[] dices)
         {
             var dice = new Dice(dices);
