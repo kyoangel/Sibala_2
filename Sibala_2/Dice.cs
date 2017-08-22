@@ -19,19 +19,13 @@ namespace Sibala_2
             var diceCount = DiceList.GroupBy(x => x).Count();
             var points = 0;
 
-            switch (result.type)
+            if (result.type == DiceType.Points)
             {
-                case DiceType.Same:
-                    return "Same";
-
-                case DiceType.NoPoint:
-                    return "NoPoint";
-
-                default:
-                    if (result.points == 12) return "18La";
-                    if (result.points == 3) return "BG";
-                    return result.points + "Point";
+                if (result.points == 12) return "18La";
+                if (result.points == 3) return "BG";
+                return result.points + "Point";
             }
+            return result.type.ToString();
         }
 
         internal DiceResult GetResult()
