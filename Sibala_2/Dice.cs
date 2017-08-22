@@ -47,6 +47,7 @@ namespace Sibala_2
 
             SetOutput();
         }
+
         private string GetOutputWhenPoints()
         {
             var isSpecialOutput = this._outputLookup.ContainsKey(this.Points);
@@ -58,50 +59,12 @@ namespace Sibala_2
             var isTypePoints = this.Type == DiceType.Points;
             this.Output = isTypePoints ? GetOutputWhenPoints() : this.Type.ToString();
         }
+
         private void SetResult()
         {
             var maxCountOfSameDice = _dices.GroupBy(x => x).Max(x => x.Count());
             var handler = this.handlersLookup[maxCountOfSameDice];
             handler.Handle(this);
-        }
-    }
-
-    internal class NoPointDiceResultHandler : IDiceResultHandler
-    {
-        public void Handle(Dice dice)
-        {
-            dice.Type = DiceType.NoPoint;
-        }
-    }
-
-    internal class PointsDiceResultHandler : IDiceResultHandler
-    {
-        public void Handle(Dice dice)
-        {
-            dice.Type = DiceType.Points;
-            var diceGrouping = dice._dices.GroupBy(x => x);
-            if (diceGrouping.Count() == 2)
-            {
-                var maxPoint = dice._dices.Max();
-                dice.Points = maxPoint * 2;
-                dice.MaxPoint = maxPoint;
-            }
-            else
-            {
-                var duplicatePoint = diceGrouping.First(x => x.Count() == 2).Key;
-                var dicesOfPoints = dice._dices.Where(x => x != duplicatePoint);
-                dice.Points = dicesOfPoints.Sum();
-                dice.MaxPoint = dicesOfPoints.Max();
-            }
-        }
-    }
-    internal class SameDiceResultHandler : IDiceResultHandler
-    {
-        public void Handle(Dice dice)
-        {
-            dice.Type = DiceType.Same;
-            dice.Points = dice._dices.Sum();
-            dice.MaxPoint = dice._dices.First();
         }
     }
 }

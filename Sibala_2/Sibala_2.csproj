@@ -56,7 +56,10 @@
   <ItemGroup>
     <Compile Include="DiceResult.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="NoPointDiceResultHandler.cs" />
+    <Compile Include="PointsDiceResultHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SameDiceResultHandler.cs" />
     <Compile Include="SibalaTests.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
