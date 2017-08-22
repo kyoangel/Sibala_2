@@ -7,27 +7,41 @@ using System.Threading.Tasks;
 namespace Sibala_2
 {
     public enum DiceType {
-        Same,
-        Points,
-        NoPoint
+        Same = 10,
+        Points = 1,
+        NoPoint = 0
     }
     public class DiceResult
     {
         public int points { get; set; }
         public DiceType type { get; set; }
+        public int maxPoint { get; set; }
 
 
-        public int Compare(DiceResult dice1, DiceResult dice2) {
-            if(dice1.type == dice2.type)
+        public int Compare(Dice dice1, Dice dice2) {
+            DiceResult result1 = dice1.GetResult();
+            DiceResult result2 = dice2.GetResult();
+
+            if (result1.type == result2.type)
             {
-                if (dice1.points > dice2.points)
+                if (result1.points > result2.points)
                     return 1;
-                else if (dice1.points == dice2.points)
+                else if (result1.points == result2.points)
                     return 0;
                 else
                     return -1;
             }
-            return 0;
+            else {
+                if ((int)result1.type > (int)result2.type)
+                {
+                    return 1;
+                }
+                else
+                    return -1;
+            }
+            return -2;
         }
+
+        
     }
 }

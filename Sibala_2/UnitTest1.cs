@@ -9,23 +9,36 @@ namespace Sibala_2
         [TestMethod]
         public void Test_Same_24_BiggerThan_Same_20()
         {
-            DiceResult DiceResult1 = new DiceResult
-            {
-                points = 24,
-                type = DiceType.Same
-            };
+            Dice d1 = new Dice(new int[] { 6, 6, 6, 6 });
+            Dice d2 = new Dice(new int[] { 5, 5, 5, 5 });
 
-            DiceResult DiceResult2 = new DiceResult
-            {
-                points = 20,
-                type = DiceType.Same
-            };
             DiceResult diceResult = new DiceResult();
 
-            int result = diceResult.Compare(DiceResult1, DiceResult2);
+            int result = diceResult.Compare(d1, d2);
             Assert.AreEqual(1, result);
-            //var diceResult = [6, 6, 6, 6];
         }
+
+        [TestMethod]
+        public void Test_Same_24_equals_Same_24()
+        {
+            Dice d1 = new Dice(new int[] { 6, 6, 6, 6 });
+            Dice d2 = new Dice(new int[] { 6, 6, 6, 6 });
+            DiceResult diceResult = new DiceResult();
         
+            int result = diceResult.Compare(d1, d2);
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void Test_Same_4_biggerthan_point_12()
+        {
+            Dice d1 = new Dice(new int[] { 1, 1, 1, 1 });
+            Dice d2 = new Dice(new int[] { 5, 5, 6, 6 });
+            DiceResult diceResult = new DiceResult();
+
+            int result = diceResult.Compare(d1, d2);
+            Assert.AreEqual(1, result);
+        }
+
     }
 }
