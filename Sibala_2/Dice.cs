@@ -51,29 +51,27 @@ namespace Sibala_2
         {
             var diceGrouping = _dices.GroupBy(x => x);
             var maxCountOfSameDice = diceGrouping.Max(x => x.Count());
+            IDiceResultHandler handler;
             switch (maxCountOfSameDice)
             {
                 case 4:
-                    var sameDiceResultHandler = new SameDiceResultHandler();
-                    sameDiceResultHandler.Handle(this);
-
+                    handler = new SameDiceResultHandler();
                     break;
 
                 case 2:
-                    var pointsDiceResultHandler = new PointsDiceResultHandler();
-                    pointsDiceResultHandler.Handle(this);
-
+                    handler = new PointsDiceResultHandler();
                     break;
 
                 default:
-                    var noPointDiceResultHandler = new NoPointDiceResultHandler();
-                    noPointDiceResultHandler.Handle(this);
+                    handler = new NoPointDiceResultHandler();
                     break;
             }
+
+            handler.Handle(this);
         }
     }
 
-    internal class NoPointDiceResultHandler
+    internal class NoPointDiceResultHandler : IDiceResultHandler
     {
         public void Handle(Dice dice)
         {
