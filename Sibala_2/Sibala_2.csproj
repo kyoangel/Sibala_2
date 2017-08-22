@@ -54,11 +54,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DiceCompare.cs" />
     <Compile Include="DiceResult.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SibalaTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="SibalaCompareDiceTest.cs" />
+    <Compile Include="SibalaDicesOrderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

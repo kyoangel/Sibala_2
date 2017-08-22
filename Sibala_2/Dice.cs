@@ -5,7 +5,7 @@ namespace Sibala_2
 {
     public class Dice
     {
-        private List<int> DiceList;
+        public List<int> DiceList;
 
         public Dice(int[] inputString)
         {
