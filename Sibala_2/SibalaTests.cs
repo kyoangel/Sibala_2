@@ -25,5 +25,22 @@ namespace Sibala_2
 
             return actualResult;
         }
+
+        [TestCase(new[] { 1, 2, 3, 4 }, ExpectedResult = 0)]
+        [TestCase(new[] { 1, 1, 1, 1 }, ExpectedResult = 1)]
+        [TestCase(new[] { 2, 2, 3, 4 }, ExpectedResult = 4)]
+        [TestCase(new[] { 2, 2, 1, 1 }, ExpectedResult = 2)]
+        [TestCase(new[] { 1, 1, 1, 2 }, ExpectedResult = 0)]
+        [TestCase(new[] { 1, 1, 6, 6 }, ExpectedResult = 6)]
+        [TestCase(new[] { 3, 3, 1, 2 }, ExpectedResult = 2)]
+        [TestCase(new[] { 1, 1, 3, 4 }, ExpectedResult = 4)]
+        public int MaxPointTest(int[] dices)
+        {
+            var dice = new Dice(dices);
+
+            var actualResult = dice.GetResult();
+
+            return actualResult.maxPoint;
+        }
     }
 }

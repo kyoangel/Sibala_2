@@ -44,7 +44,8 @@ namespace Sibala_2
                     return new DiceResult
                     {
                         type = DiceType.Same,
-                        points = DiceList.Sum()
+                        points = DiceList.Sum(),
+                        maxPoint = DiceList.Sum() / 4
                     };
 
                 case 2:
@@ -60,7 +61,8 @@ namespace Sibala_2
                     return new DiceResult
                     {
                         type = DiceType.Points,
-                        points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2
+                        points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2,
+                        maxPoint = DiceList.Max()
                     };
 
                 case 3:
@@ -68,7 +70,8 @@ namespace Sibala_2
                     return new DiceResult
                     {
                         type = DiceType.Points,
-                        points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key)
+                        points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key),
+                        maxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key)
                     };
 
                 case 4:
