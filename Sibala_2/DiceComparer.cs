@@ -27,29 +27,44 @@ namespace Sibala_2
             {
                 if (dice1.Type == DiceType.Same)
                 {
-                    var weightOfDice1 = SamePointWeight[dice1.Points];
-                    var weightOfDice2 = SamePointWeight[dice2.Points];
-
-                    return weightOfDice1 - weightOfDice2;
+                    return SameResultComparer(dice1, dice2);
                 }
                 else if (dice1.Type == DiceType.Points)
                 {
-                    if (dice1.Points == dice2.Points)
-                    {
-                        return dice1.MaxPoint - dice2.MaxPoint;
-                    }
-
-                    return dice1.Points - dice2.Points;
+                    return PointsResultComparer(dice1, dice2);
                 }
                 else
                 {
-                    return 0;
+                    return NoPointResultCompare();
                 }
             }
             else
             {
                 return (int)dice1.Type - (int)dice2.Type;
             }
+        }
+
+        private int NoPointResultCompare()
+        {
+            return 0;
+        }
+
+        private int PointsResultComparer(Dice dice1, Dice dice2)
+        {
+            if (dice1.Points == dice2.Points)
+            {
+                return dice1.MaxPoint - dice2.MaxPoint;
+            }
+
+            return dice1.Points - dice2.Points;
+        }
+
+        private int SameResultComparer(Dice dice1, Dice dice2)
+        {
+            var weightOfDice1 = SamePointWeight[dice1.Points];
+            var weightOfDice2 = SamePointWeight[dice2.Points];
+
+            return weightOfDice1 - weightOfDice2;
         }
     }
 }
