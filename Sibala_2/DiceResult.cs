@@ -18,8 +18,16 @@ namespace Sibala_2
 
 
         public int Compare(DiceResult dice1, DiceResult dice2) {
-
-            return 1;
+            if(dice1.type == dice2.type)
+            {
+                if (dice1.points > dice2.points)
+                    return 1;
+                else if (dice1.points == dice2.points)
+                    return 0;
+                else
+                    return -1;
+            }
+            return 0;
         }
     }
 }
