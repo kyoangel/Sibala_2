@@ -18,28 +18,19 @@ namespace Sibala_2
 
             var diceCount = DiceList.GroupBy(x => x).Count();
             var points = 0;
-            switch (diceCount)
+
+            switch (result.type)
             {
-                case 1:
+                case DiceType.Same:
                     return "Same";
 
-                case 2:
-                    if (DiceList.GroupBy(x => x).Max(x => x.Count()) == 3)
-                    {
-                        return "NoPoint";
-                    }
-                    points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2;
-                    return points.ToString() + "Point";
-
-                case 3:
-                    points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
-                    return points.ToString() + "Point";
-
-                case 4:
+                case DiceType.NoPoint:
                     return "NoPoint";
 
                 default:
-                    return "NoPoint";
+                    if (result.points == 12) return "18La";
+                    if (result.points == 3) return "BG";
+                    return result.points + "Point";
             }
         }
 
