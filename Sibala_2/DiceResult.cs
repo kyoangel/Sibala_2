@@ -16,5 +16,10 @@ namespace Sibala_2
         int points { get; set; }
         DiceType type { get; set; }
 
+
+        public int Compare(Dice dice1,Dice dice2) {
+
+            return 1;
+        }
     }
 }
