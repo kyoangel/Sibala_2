@@ -13,28 +13,37 @@ namespace Sibala_2
     {
         public override int Compare(Dice dice1, Dice dice2)
         {
-            if (dice1.Type == dice2.Type)
-            {
-                IComparer<Dice> comparer;
-                if (dice1.Type == DiceType.Same)
-                {
-                    comparer = new SameResultComparer();
-                }
-                else if (dice1.Type == DiceType.Points)
-                {
-                    comparer = new PointsResultComparer();
-                }
-                else
-                {
-                    comparer = new NoPointResultComparer();
-                }
+            return dice1.Type == dice2.Type
+                ? SameTypeCompare(dice1, dice2)
+                : DifferentTypeCompare(dice1, dice2);
+        }
 
-                return comparer.Compare(dice1, dice2);
+        private static int DifferentTypeCompare(Dice dice1, Dice dice2)
+        {
+            return (int)dice1.Type - (int)dice2.Type;
+        }
+
+        private static int SameTypeCompare(Dice dice1, Dice dice2)
+        {
+            return GetComparer(dice1).Compare(dice1, dice2);
+        }
+
+        private static IComparer<Dice> GetComparer(Dice dice1)
+        {
+            IComparer<Dice> comparer;
+            if (dice1.Type == DiceType.Same)
+            {
+                comparer = new SameResultComparer();
+            }
+            else if (dice1.Type == DiceType.Points)
+            {
+                comparer = new PointsResultComparer();
             }
             else
             {
-                return (int)dice1.Type - (int)dice2.Type;
+                comparer = new NoPointResultComparer();
             }
+            return comparer;
         }
     }
 }
