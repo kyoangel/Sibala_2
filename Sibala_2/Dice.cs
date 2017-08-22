@@ -16,6 +16,7 @@ namespace Sibala_2
         public int MaxPoint { get; set; }
 
         public string Output { get; set; }
+
         public int Points { get; set; }
 
         public DiceType Type { get; set; }
@@ -27,17 +28,19 @@ namespace Sibala_2
             SetOutput();
         }
 
+        private Dictionary<int, string> _outputLookup = new Dictionary<int, string>
+        {
+            {12, "18La" },
+            {3,  "BG"}
+        };
+
         private void SetOutput()
         {
             if (this.Type == DiceType.Points)
             {
-                if (this.Points == 12)
+                if (this._outputLookup.ContainsKey(this.Points))
                 {
-                    this.Output = "18La";
-                }
-                else if (this.Points == 3)
-                {
-                    this.Output = "BG";
+                    this.Output = this._outputLookup[this.Points];
                 }
                 else
                 {
