@@ -47,7 +47,7 @@ namespace Sibala_2
         [Test]
         public void Test_points_6_biggerThan_points_6()
         {
-            CompareDice(new int[] { 1, 1, 5, 1 }, new int[] { 4, 4, 4, 2 }, 1);
+            CompareDice(new int[] { 2, 2, 5, 1 }, new int[] { 3, 3, 4, 2 }, 1);
         }
 
         private void CompareDice(int[] d1, int[] d2, int expect)
