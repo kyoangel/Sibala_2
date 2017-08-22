@@ -31,6 +31,19 @@ namespace Sibala_2
             
         }
 
+        [TestMethod]
+        public void Test_point_3_biggerthan_nopoint_0()
+        {
+            CompareDice(new int[] { 3, 3, 1, 2 }, new int[] { 1, 2, 3, 4 }, 1);
+
+        }
+
+        [TestMethod]
+        public void Test_nopoint_0_equal_nopoint_0()
+        {
+            CompareDice(new int[] { 4, 3, 1, 2 }, new int[] { 1, 2, 3, 4 }, 0);
+        }
+
         private void CompareDice(int[] d1, int[] d2, int expect)
         {
             DiceResult diceResult = new DiceResult();
