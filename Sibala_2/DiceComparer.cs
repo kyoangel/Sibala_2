@@ -28,22 +28,16 @@ namespace Sibala_2
             return GetComparer(dice1).Compare(dice1, dice2);
         }
 
+        private static readonly Dictionary<DiceType, IComparer<Dice>> diceSameTypeComparers = new Dictionary<DiceType, IComparer<Dice>>()
+        {
+            {DiceType.Same, new SameResultComparer() },
+            {DiceType.Points, new PointsResultComparer() },
+            {DiceType.NoPoint, new NoPointResultComparer() },
+        };
+
         private static IComparer<Dice> GetComparer(Dice dice1)
         {
-            IComparer<Dice> comparer;
-            if (dice1.Type == DiceType.Same)
-            {
-                comparer = new SameResultComparer();
-            }
-            else if (dice1.Type == DiceType.Points)
-            {
-                comparer = new PointsResultComparer();
-            }
-            else
-            {
-                comparer = new NoPointResultComparer();
-            }
-            return comparer;
+            return diceSameTypeComparers[dice1.Type];
         }
     }
 }
