@@ -27,11 +27,11 @@ namespace Sibala_2
             {
                 if (dice1.Type == DiceType.Same)
                 {
-                    return SameResultComparer(dice1, dice2);
+                    return SameResultCompare(dice1, dice2);
                 }
                 else if (dice1.Type == DiceType.Points)
                 {
-                    return PointsResultComparer(dice1, dice2);
+                    return PointsResultCompare(dice1, dice2);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ namespace Sibala_2
             return 0;
         }
 
-        private int PointsResultComparer(Dice dice1, Dice dice2)
+        private int PointsResultCompare(Dice dice1, Dice dice2)
         {
             if (dice1.Points == dice2.Points)
             {
@@ -59,7 +59,7 @@ namespace Sibala_2
             return dice1.Points - dice2.Points;
         }
 
-        private int SameResultComparer(Dice dice1, Dice dice2)
+        private int SameResultCompare(Dice dice1, Dice dice2)
         {
             var weightOfDice1 = SamePointWeight[dice1.Points];
             var weightOfDice2 = SamePointWeight[dice2.Points];
