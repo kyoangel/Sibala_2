@@ -9,14 +9,8 @@ namespace Sibala_2
         NoPoint = 0
     }
 
-    public class DiceResult
+    public class DiceComparer : Comparer<Dice>
     {
-        //public int Points { get; set; }
-
-        //public DiceType Type { get; set; }
-
-        //public int MaxPoint { get; set; }
-
         private Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
         {
             { 4,6},
@@ -27,7 +21,7 @@ namespace Sibala_2
             { 8,1}
         };
 
-        public int Compare(Dice dice1, Dice dice2)
+        public override int Compare(Dice dice1, Dice dice2)
         {
             if (dice1.Type == dice2.Type)
             {

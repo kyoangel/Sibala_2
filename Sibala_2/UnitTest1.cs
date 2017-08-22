@@ -55,12 +55,12 @@ namespace Sibala_2
 
         private void FirstDiceShouldBeLarger(Dice dice1, Dice dice2)
         {
-            Assert.IsTrue(new DiceResult().Compare(dice1, dice2) > 0);
+            Assert.IsTrue(new DiceComparer().Compare(dice1, dice2) > 0);
         }
 
         private void FirstDiceShouldEqualsSecondDice(Dice dice1, Dice dice2)
         {
-            Assert.IsTrue(new DiceResult().Compare(dice1, dice2) == 0);
+            Assert.IsTrue(new DiceComparer().Compare(dice1, dice2) == 0);
         }
     }
 }

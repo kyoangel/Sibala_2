@@ -54,7 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DiceResult.cs" />
+    <Compile Include="DiceComparer.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="NoPointDiceResultHandler.cs" />
     <Compile Include="PointsDiceResultHandler.cs" />
