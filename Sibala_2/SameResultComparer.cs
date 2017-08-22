@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Sibala_2
 {
-    public class SameResultComparer
+    public class SameResultComparer : IComparer<Dice>
     {
         private Dictionary<int, int> SamePointWeight = new Dictionary<int, int>
         {

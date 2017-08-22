@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace Sibala_2
 {
-    public class PointsResultComparer
+    public class PointsResultComparer : IComparer<Dice>
     {
         public int Compare(Dice dice1, Dice dice2)
         {

@@ -15,18 +15,21 @@ namespace Sibala_2
         {
             if (dice1.Type == dice2.Type)
             {
+                IComparer<Dice> comparer;
                 if (dice1.Type == DiceType.Same)
                 {
-                    return new SameResultComparer().Compare(dice1, dice2);
+                    comparer = new SameResultComparer();
                 }
                 else if (dice1.Type == DiceType.Points)
                 {
-                    return new PointsResultComparer().Compare(dice1, dice2);
+                    comparer = new PointsResultComparer();
                 }
                 else
                 {
-                    return new NoPointResultComparer().Compare(dice1, dice2);
+                    comparer = new NoPointResultComparer();
                 }
+
+                return comparer.Compare(dice1, dice2);
             }
             else
             {
