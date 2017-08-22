@@ -13,11 +13,11 @@ namespace Sibala_2
     }
     public class DiceResult
     {
-        int points { get; set; }
-        DiceType type { get; set; }
+        public int points { get; set; }
+        public DiceType type { get; set; }
 
 
-        public int Compare(Dice dice1,Dice dice2) {
+        public int Compare(DiceResult dice1, DiceResult dice2) {
 
             return 1;
         }

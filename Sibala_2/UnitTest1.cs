@@ -9,12 +9,20 @@ namespace Sibala_2
         [TestMethod]
         public void Test_Same_24_BiggerThan_Same_20()
         {
-            DiceResult DiceResult = new DiceResult();
-            int[] same6 = new int[4] { 6,6,6,6};
-            int[] same5 = new int[4] { 5, 5, 5, 5 };
-            Dice d1 = new Dice(same6);
-            Dice d2 = new Dice(same5);
-            int result =DiceResult.Compare(d1,d2);
+            DiceResult DiceResult1 = new DiceResult
+            {
+                points = 24,
+                type = DiceType.Same
+            };
+
+            DiceResult DiceResult2 = new DiceResult
+            {
+                points = 20,
+                type = DiceType.Same
+            };
+            DiceResult diceResult = new DiceResult();
+
+            int result = diceResult.Compare(DiceResult1, DiceResult2);
             Assert.AreEqual(1, result);
             //var diceResult = [6, 6, 6, 6];
         }
