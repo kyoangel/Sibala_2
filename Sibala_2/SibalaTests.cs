@@ -11,8 +11,14 @@ namespace Sibala_2
     public class SibalaTests
     {
         [Test]
-        public void Test1()
+        [TestCase("1,2,3,4", ExpectedResult = "NoPoint")]
+        public string BasicTest(string inputString)
         {
+            var dice = new Dice(inputString);
+
+            var actualResult = dice.calculat();
+
+            return actualResult;
         }
     }
 }
