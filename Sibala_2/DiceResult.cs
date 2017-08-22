@@ -51,12 +51,7 @@ namespace Sibala_2
             }
             else
             {
-                if ((int)result1.type > (int)result2.type)
-                {
-                    return 1;
-                }
-                else
-                    return -1;
+                return (int) result1.type - (int) result2.type;
             }
         }
     }
