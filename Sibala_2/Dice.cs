@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Sibala_2
 {
     public class Dice
     {
-        private readonly List<int> _dices;
+        public readonly ReadOnlyCollection<int> _dices;
 
         public Dice(int[] inputString)
         {
-            _dices = inputString.ToList();
+            _dices = new ReadOnlyCollection<int>(inputString);
             this.Calculate();
         }
 
@@ -53,9 +54,9 @@ namespace Sibala_2
             switch (maxCountOfSameDice)
             {
                 case 4:
-                    this.Type = DiceType.Same;
-                    this.Points = this._dices.Sum();
-                    this.MaxPoint = this._dices.First();
+                    var sameDiceResultHandler = new SameDiceResultHandler();
+                    sameDiceResultHandler.Handle(this);
+
                     break;
 
                 case 2:
@@ -80,6 +81,16 @@ namespace Sibala_2
                     this.Type = DiceType.NoPoint;
                     break;
             }
+        }
+    }
+
+    internal class SameDiceResultHandler
+    {
+        public void Handle(Dice dice)
+        {
+            dice.Type = DiceType.Same;
+            dice.Points = dice._dices.Sum();
+            dice.MaxPoint = dice._dices.First();
         }
     }
 }
