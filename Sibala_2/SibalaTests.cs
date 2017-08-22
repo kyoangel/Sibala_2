@@ -34,6 +34,7 @@ namespace Sibala_2
         [TestCase(new[] { 1, 1, 6, 6 }, ExpectedResult = 6)]
         [TestCase(new[] { 3, 3, 1, 2 }, ExpectedResult = 2)]
         [TestCase(new[] { 1, 1, 3, 4 }, ExpectedResult = 4)]
+        [TestCase(new[] { 1, 1, 5, 1 }, ExpectedResult = 0)]
         public int MaxPointTest(int[] dices)
         {
             var dice = new Dice(dices);

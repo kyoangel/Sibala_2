@@ -38,10 +38,18 @@ namespace Sibala_2
 
         }
 
+
+
         [TestMethod]
         public void Test_same_1_biggerthan_same_4()
         {
             CompareDice(new int[] { 1, 1, 1, 1 }, new int[] { 4, 4, 4, 4 }, 1);
+        }
+
+        [TestMethod]
+        public void Test_points_6_biggerThan_points_6()
+        {
+            CompareDice(new int[] { 1, 1, 5, 1 }, new int[] {4,4,4,2 }, 1);
         }
 
         private void CompareDice(int[] d1, int[] d2, int expect)

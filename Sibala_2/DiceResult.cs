@@ -45,10 +45,13 @@ namespace Sibala_2
 
                     return tem1 > tem2 ? 1 : tem1 == tem2 ? 0 : -1;
                 }
+
                 if (result1.points > result2.points)
                     return 1;
                 else if (result1.points == result2.points)
-                    return 0;
+                {
+                    return result1.maxPoint > result2.maxPoint ? 1 : result1.maxPoint == result2.maxPoint ? 0 : -1;
+                }
                 else
                     return -1;
             }
