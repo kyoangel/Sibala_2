@@ -4,9 +4,28 @@ using System.Linq;
 
 namespace Sibala_2
 {
+    internal interface IDiceResultHandler
+    {
+        void Handle(Dice dice);
+    }
+
     public class Dice
     {
         public readonly ReadOnlyCollection<int> _dices;
+
+        private Dictionary<int, string> _outputLookup = new Dictionary<int, string>
+        {
+            {12, "18La" },
+            {3,  "BG"}
+        };
+
+        private Dictionary<int, IDiceResultHandler> handlersLookup = new Dictionary<int, IDiceResultHandler>()
+        {
+            {4, new SameDiceResultHandler()},
+            {2, new PointsDiceResultHandler()},
+            {3, new NoPointDiceResultHandler()},
+            {1, new NoPointDiceResultHandler()},
+        };
 
         public Dice(int[] inputString)
         {
@@ -28,45 +47,21 @@ namespace Sibala_2
 
             SetOutput();
         }
-
-        private Dictionary<int, string> _outputLookup = new Dictionary<int, string>
-        {
-            {12, "18La" },
-            {3,  "BG"}
-        };
-
-        private void SetOutput()
-        {
-            var isTypePoints = this.Type == DiceType.Points;
-            this.Output = isTypePoints ? GetOutputWhenPoints() : this.Type.ToString();
-        }
-
         private string GetOutputWhenPoints()
         {
             var isSpecialOutput = this._outputLookup.ContainsKey(this.Points);
             return isSpecialOutput ? this._outputLookup[this.Points] : this.Points + "Point";
         }
 
+        private void SetOutput()
+        {
+            var isTypePoints = this.Type == DiceType.Points;
+            this.Output = isTypePoints ? GetOutputWhenPoints() : this.Type.ToString();
+        }
         private void SetResult()
         {
-            var diceGrouping = _dices.GroupBy(x => x);
-            var maxCountOfSameDice = diceGrouping.Max(x => x.Count());
-            IDiceResultHandler handler;
-            switch (maxCountOfSameDice)
-            {
-                case 4:
-                    handler = new SameDiceResultHandler();
-                    break;
-
-                case 2:
-                    handler = new PointsDiceResultHandler();
-                    break;
-
-                default:
-                    handler = new NoPointDiceResultHandler();
-                    break;
-            }
-
+            var maxCountOfSameDice = _dices.GroupBy(x => x).Max(x => x.Count());
+            var handler = this.handlersLookup[maxCountOfSameDice];
             handler.Handle(this);
         }
     }
@@ -100,12 +95,6 @@ namespace Sibala_2
             }
         }
     }
-
-    internal interface IDiceResultHandler
-    {
-        void Handle(Dice dice);
-    }
-
     internal class SameDiceResultHandler : IDiceResultHandler
     {
         public void Handle(Dice dice)
