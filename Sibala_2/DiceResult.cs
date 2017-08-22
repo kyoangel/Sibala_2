@@ -23,12 +23,12 @@ namespace Sibala_2
 
         public Dictionary<int, int> PointConvert = new Dictionary<int, int>
         {
-            { 1,6},
-            { 4,5},
-            { 6,4},
-            { 5,3},
-            {3,2 },
-            {2,1 }
+            { 4,6},
+            { 16,5},
+            { 24,4},
+            { 20,3},
+            { 12,2},
+            { 8,1}
         };
 
         public int Compare(Dice dice1, Dice dice2)
@@ -40,8 +40,8 @@ namespace Sibala_2
             {
                 if (result1.type == DiceType.Same)
                 {
-                    var tem1 = PointConvert[result1.points / 4];
-                    var tem2 = PointConvert[result2.points / 4];
+                    var tem1 = PointConvert[result1.points];
+                    var tem2 = PointConvert[result2.points];
 
                     return tem1 > tem2 ? 1 : tem1 == tem2 ? 0 : -1;
                 }
