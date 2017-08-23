@@ -32,21 +32,16 @@ namespace Sibala_2
                 { 3,"BG"}
             };
 
-            if (this.Type == DiceType.Points)
-            {
-                if (specialOutput.ContainsKey(this.Points))
-                {
-                    this.Output = specialOutput[this.Points];
-                }
-                else
-                {
-                    this.Output = this.Points + "Point";
-                }
-            }
-            else
-            {
-                this.Output = this.Type.ToString();
-            }
+            this.Output = this.Type == DiceType.Points
+                ? GetNormalPoint(specialOutput)
+                : this.Type.ToString();
+        }
+
+        private string GetNormalPoint(Dictionary<int, string> specialOutput)
+        {
+            return specialOutput.ContainsKey(this.Points)
+                ? specialOutput[this.Points]
+                : this.Points + "Point";
         }
 
         internal void SetResult()
