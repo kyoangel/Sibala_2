@@ -28,15 +28,22 @@ namespace Sibala_2
 
                     return weightOfDice1 - weightOfDice2;
                 }
-
-                if (result1.Type == DiceType.Points && result1.Points == result2.Points)
+                else if (result1.Type == DiceType.Points)
                 {
-                    return result1.MaxPoint > result2.MaxPoint ? 1 : result1.MaxPoint == result2.MaxPoint ? 0 : -1;
+                    if (result1.Points == result2.Points)
+                    {
+                        return result1.MaxPoint - result2.MaxPoint;
+                    }
+                    else
+                    {
+                        return result1.Points - result2.Points;
+                    }
                 }
-
-                if (result1.Points > result2.Points)
-                    return 1;
-                return 0;
+                else
+                {
+                    return 0;
+                }
+                
             }
             return result1.Type - result2.Type;
         }
