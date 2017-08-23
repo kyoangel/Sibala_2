@@ -46,39 +46,33 @@ namespace Sibala_2
 
         internal void SetResult()
         {
-            var diceCount = dices.GroupBy(x => x).Count();
-            switch (diceCount)
+            var diceGroups = dices.GroupBy(x => x);
+            var sameDiceMaxCount = diceGroups.Max(g => g.Count());
+            switch (sameDiceMaxCount)
             {
-                case 1:
+                case 4:
                     Type = DiceType.Same;
                     Points = dices.Sum();
                     MaxPoint = dices.First();
                     break;
-
                 case 2:
-                    if (dices.GroupBy(x => x).Max(x => x.Count()) == 3)
+                    Type = DiceType.Points;
+                    if (diceGroups.Count() == 2)
                     {
-                        Type = DiceType.NoPoint;
-                        Points = 0;
+                        Points = diceGroups.Max(s => s.Key) * 2;
+                        MaxPoint = dices.Max();
                     }
                     else
                     {
-                        Type = DiceType.Points;
-                        Points = dices.GroupBy(x => x).Max(s => s.Key) * 2;
-                        MaxPoint = dices.Max();
+                        var duplicateNumber = diceGroups.First(x => x.Count() == 2).Key;
+                        var dicesOfPoints = this.dices.Where(x => x != duplicateNumber);
+
+                        Points = dicesOfPoints.Sum();
+                        MaxPoint = dicesOfPoints.Max();
                     }
                     break;
-
-                case 3:
-
-                    Type = DiceType.Points;
-                    Points = dices.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
-                    MaxPoint = dices.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key);
-                    break;
-
                 default:
                     Type = DiceType.NoPoint;
-                    Points = 0;
                     break;
             }
         }
