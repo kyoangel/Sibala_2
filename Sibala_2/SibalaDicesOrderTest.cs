@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace Sibala_2
 {
-    [TestClass]
+    [TestFixture]
     public class SibalaDicesOrderTest
     {
-        [TestMethod]
+        [Test]
         public void OrderTest()
         {
             var input = new List<Dice>
@@ -22,14 +21,15 @@ namespace Sibala_2
             };
             var helper = new DiceCompare();
             input.Sort(helper);
+            input.Reverse();
 
             var expected = new List<Dice>
             {
-                new Dice(new[] {1, 2, 3, 4}),
-                new Dice(new[] {3, 3, 2, 4}),
-                new Dice(new[] {3, 5, 3, 1}),
-                new Dice(new[] {4, 4, 4, 4}),
                 new Dice(new[] {1, 1, 1, 1}),
+                new Dice(new[] {4, 4, 4, 4}),
+                new Dice(new[] {3, 5, 3, 1}),
+                new Dice(new[] {3, 3, 2, 4}),
+                new Dice(new[] {1, 2, 3, 4})
             };
 
             Assert.IsTrue(input[0].DiceList.SequenceEqual(expected[0].DiceList));

@@ -1,11 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+﻿using NUnit.Framework;
 
 namespace Sibala_2
 {
-    [TestFixture()]
+    [TestFixture]
     public class SibalaCompareDiceTest
     {
         [Test]

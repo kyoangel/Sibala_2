@@ -19,6 +19,13 @@ namespace Sibala_2
             DiceResult result1 = dice1.GetResult();
             DiceResult result2 = dice2.GetResult();
 
+            if (result1.type > result2.type)
+            {
+                return 1;
+            }
+            if (result1.type < result2.type)
+                return -1;
+
             if (result1.type == result2.type)
             {
                 if (result1.type == DiceType.Same)
@@ -38,12 +45,7 @@ namespace Sibala_2
                     return 1;
                 return -1;
             }
-
-            if ((int)result1.type > (int)result2.type)
-            {
-                return 1;
-            }
-            return -1;
+            return 0;
         }
     }
 }
