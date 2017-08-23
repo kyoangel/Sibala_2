@@ -16,7 +16,7 @@ namespace Sibala_2
         {
             var dice = new Dice(dices);
 
-            var actualResult = dice.Calculate();
+            string actualResult = dice.Output;
 
             return actualResult;
         }
@@ -34,9 +34,9 @@ namespace Sibala_2
         {
             var dice = new Dice(dices);
 
-            var actualResult = dice.GetResult();
+            dice.SetResult();
 
-            return actualResult.MaxPoint;
+            return dice.MaxPoint;
         }
     }
 }
