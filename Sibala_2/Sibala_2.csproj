@@ -54,10 +54,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Comparers\NoPointComparer.cs" />
+    <Compile Include="Comparers\PointComparer.cs" />
     <Compile Include="DiceCompare.cs" />
     <Compile Include="DiceResult.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="IDiceResultHandler.cs" />
+    <Compile Include="NoPointResultHandler.cs" />
+    <Compile Include="PointsResultHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SameComparer.cs" />
+    <Compile Include="SamePointResultHandler.cs" />
     <Compile Include="SibalaTests.cs" />
     <Compile Include="SibalaCompareDiceTest.cs" />
     <Compile Include="SibalaDicesOrderTest.cs" />

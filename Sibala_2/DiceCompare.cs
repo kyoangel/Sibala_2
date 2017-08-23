@@ -1,53 +1,28 @@
 ﻿using System.Collections.Generic;
+using Sibala_2.Comparers;
 
 namespace Sibala_2
 {
-    public class DiceCompare : IComparer<Dice>
+    //public class DiceCompare : IComparer<Dice>
+    public class DiceCompare : Comparer<Dice>
     {
-        private Dictionary<int, int> weightLookup = new Dictionary<int, int>
+        public override int Compare(Dice dice1, Dice dice2)
         {
-            {4, 6},
-            {16, 5},
-            {24, 4},
-            {20, 3},
-            {12, 2},
-            {8, 1}
-        };
+            return dice1.Type == dice2.Type 
+                ? GetComparer(dice1).Compare(dice1, dice2) 
+                : dice1.Type - dice2.Type;
+        }
 
-        public int Compare(Dice dice1, Dice dice2)
+        private static IComparer<Dice> GetComparer(Dice dice1)
         {
-            //DiceResult result1 = dice1.GetResult();
-            //DiceResult result2 = dice2.GetResult();
-
-
-
-            if (dice1.Type == dice2.Type)
+            var comparersLookup = new Dictionary<DiceType, IComparer<Dice>>()
             {
-                if (dice1.Type == DiceType.Same)
-                {
-                    var weightOfDice1 = weightLookup[dice1.Points];
-                    var weightOfDice2 = weightLookup[dice2.Points];
-
-                    return weightOfDice1 - weightOfDice2;
-                }
-                else if (dice1.Type == DiceType.Points)
-                {
-                    if (dice1.Points == dice2.Points)
-                    {
-                        return dice1.MaxPoint - dice2.MaxPoint;
-                    }
-                    else
-                    {
-                        return dice1.Points - dice2.Points;
-                    }
-                }
-                else
-                {
-                    return 0;
-                }
-                
-            }
-            return dice1.Type - dice2.Type;
+                {DiceType.NoPoint, new NoPointComparer()},
+                {DiceType.Same, new SameComparer()},
+                {DiceType.Points, new PointComparer()},
+            };
+           
+            return comparersLookup[dice1.Type];
         }
     }
 }
