@@ -16,8 +16,6 @@ namespace Sibala_2
         {
             var result = GetResult();
 
-            var diceCount = DiceList.GroupBy(x => x).Count();
-
             if (result.type == DiceType.Points)
             {
                 if (result.points == 12) return "18La";
@@ -30,7 +28,6 @@ namespace Sibala_2
         internal DiceResult GetResult()
         {
             var diceCount = DiceList.GroupBy(x => x).Count();
-            var points = 0;
             switch (diceCount)
             {
                 case 1:
@@ -50,7 +47,6 @@ namespace Sibala_2
                             points = 0
                         };
                     }
-                    points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2;
                     return new DiceResult
                     {
                         type = DiceType.Points,
@@ -59,7 +55,6 @@ namespace Sibala_2
                     };
 
                 case 3:
-                    points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
                     return new DiceResult
                     {
                         type = DiceType.Points,
