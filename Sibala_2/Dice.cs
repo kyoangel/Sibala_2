@@ -16,13 +16,13 @@ namespace Sibala_2
         {
             var result = GetResult();
 
-            if (result.type == DiceType.Points)
+            if (result.Type == DiceType.Points)
             {
-                if (result.points == 12) return "18La";
-                if (result.points == 3) return "BG";
-                return result.points + "Point";
+                if (result.Points == 12) return "18La";
+                if (result.Points == 3) return "BG";
+                return result.Points + "Point";
             }
-            return result.type.ToString();
+            return result.Type.ToString();
         }
 
         internal DiceResult GetResult()
@@ -33,9 +33,9 @@ namespace Sibala_2
                 case 1:
                     return new DiceResult
                     {
-                        type = DiceType.Same,
-                        points = DiceList.Sum(),
-                        maxPoint = DiceList.Sum() / 4
+                        Type = DiceType.Same,
+                        Points = DiceList.Sum(),
+                        MaxPoint = DiceList.Sum() / 4
                     };
 
                 case 2:
@@ -43,30 +43,30 @@ namespace Sibala_2
                     {
                         return new DiceResult
                         {
-                            type = DiceType.NoPoint,
-                            points = 0
+                            Type = DiceType.NoPoint,
+                            Points = 0
                         };
                     }
                     return new DiceResult
                     {
-                        type = DiceType.Points,
-                        points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2,
-                        maxPoint = DiceList.Max()
+                        Type = DiceType.Points,
+                        Points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2,
+                        MaxPoint = DiceList.Max()
                     };
 
                 case 3:
                     return new DiceResult
                     {
-                        type = DiceType.Points,
-                        points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key),
-                        maxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key)
+                        Type = DiceType.Points,
+                        Points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key),
+                        MaxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key)
                     };
 
                 default:
                     return new DiceResult
                     {
-                        type = DiceType.NoPoint,
-                        points = 0
+                        Type = DiceType.NoPoint,
+                        Points = 0
                     };
             }
         }

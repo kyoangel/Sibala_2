@@ -9,8 +9,8 @@
 
     public class DiceResult
     {
-        public int points { get; set; }
-        public DiceType type { get; set; }
-        public int maxPoint { get; set; }
+        public int Points { get; set; }
+        public DiceType Type { get; set; }
+        public int MaxPoint { get; set; }
     }
 }
