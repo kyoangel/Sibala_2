@@ -48,33 +48,68 @@ namespace Sibala_2
         {
             var diceGroups = dices.GroupBy(x => x);
             var sameDiceMaxCount = diceGroups.Max(g => g.Count());
+            var handler = GetDiceResultHandler(sameDiceMaxCount);
+            handler.Handle(this);
+        }
+
+        private static IDiceResultHandler GetDiceResultHandler(int sameDiceMaxCount)
+        {
             switch (sameDiceMaxCount)
             {
                 case 4:
-                    Type = DiceType.Same;
-                    Points = dices.Sum();
-                    MaxPoint = dices.First();
-                    break;
-                case 2:
-                    Type = DiceType.Points;
-                    if (diceGroups.Count() == 2)
-                    {
-                        Points = diceGroups.Max(s => s.Key) * 2;
-                        MaxPoint = dices.Max();
-                    }
-                    else
-                    {
-                        var duplicateNumber = diceGroups.First(x => x.Count() == 2).Key;
-                        var dicesOfPoints = this.dices.Where(x => x != duplicateNumber);
+                    return new SamePointResultHandler();
 
-                        Points = dicesOfPoints.Sum();
-                        MaxPoint = dicesOfPoints.Max();
-                    }
-                    break;
+                case 2:
+                    return new PointsResultHandler();
+
                 default:
-                    Type = DiceType.NoPoint;
-                    break;
+                    return new NoPointResultHandler();
             }
+        }
+    }
+
+    internal class NoPointResultHandler : IDiceResultHandler
+    {
+        public void Handle(Dice dice)
+        {
+            dice.Type = DiceType.NoPoint;
+        }
+    }
+
+    internal class PointsResultHandler : IDiceResultHandler
+    {
+        public void Handle(Dice dice)
+        {
+            dice.Type = DiceType.Points;
+            var diceGroups = dice.dices.GroupBy(x => x);
+            if (diceGroups.Count() == 2)
+            {
+                dice.Points = diceGroups.Max(s => s.Key) * 2;
+                dice.MaxPoint = dice.dices.Max();
+            }
+            else
+            {
+                var duplicateNumber = diceGroups.First(x => x.Count() == 2).Key;
+                var dicesOfPoints = dice.dices.Where(x => x != duplicateNumber);
+
+                dice.Points = dicesOfPoints.Sum();
+                dice.MaxPoint = dicesOfPoints.Max();
+            }
+        }
+    }
+
+    internal interface IDiceResultHandler
+    {
+        void Handle(Dice dice);
+    }
+
+    internal class SamePointResultHandler : IDiceResultHandler
+    {
+        public void Handle(Dice dice)
+        {
+            dice.Type = DiceType.Same;
+            dice.Points = dice.dices.Sum();
+            dice.MaxPoint = dice.dices.First();
         }
     }
 }
