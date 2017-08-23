@@ -10,11 +10,11 @@ namespace Sibala_2
         public int MaxPoint { get; set; }
         public string Output { get; set; }
 
-        public List<int> DiceList;
+        public List<int> dices;
 
-        public Dice(int[] inputString)
+        public Dice(int[] dices)
         {
-            DiceList = inputString.ToList();
+            this.dices = dices.ToList();
             Calculate();
         }
 
@@ -26,10 +26,18 @@ namespace Sibala_2
 
         private void SetOutput()
         {
+            var specialOutput = new Dictionary<int, string>()
+            {
+                { 12,"18La"},
+                { 3,"BG"}
+            };
+
             if (this.Type == DiceType.Points)
             {
-                if (this.Points == 12) this.Output = "18La";
-                else if (this.Points == 3) this.Output = "BG";
+                if (specialOutput.ContainsKey(this.Points))
+                {
+                    this.Output = specialOutput[this.Points];
+                }
                 else
                 {
                     this.Output = this.Points + "Point";
@@ -43,17 +51,17 @@ namespace Sibala_2
 
         internal void SetResult()
         {
-            var diceCount = DiceList.GroupBy(x => x).Count();
+            var diceCount = dices.GroupBy(x => x).Count();
             switch (diceCount)
             {
                 case 1:
                     Type = DiceType.Same;
-                    Points = DiceList.Sum();
-                    MaxPoint = DiceList.Sum() / 4;
+                    Points = dices.Sum();
+                    MaxPoint = dices.First();
                     break;
 
                 case 2:
-                    if (DiceList.GroupBy(x => x).Max(x => x.Count()) == 3)
+                    if (dices.GroupBy(x => x).Max(x => x.Count()) == 3)
                     {
                         Type = DiceType.NoPoint;
                         Points = 0;
@@ -61,23 +69,22 @@ namespace Sibala_2
                     else
                     {
                         Type = DiceType.Points;
-                        Points = DiceList.GroupBy(x => x).Max(s => s.Key) * 2;
-                        MaxPoint = DiceList.Max();
+                        Points = dices.GroupBy(x => x).Max(s => s.Key) * 2;
+                        MaxPoint = dices.Max();
                     }
                     break;
 
                 case 3:
 
                     Type = DiceType.Points;
-                    Points = DiceList.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
-                    MaxPoint = DiceList.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key);
+                    Points = dices.GroupBy(x => x).Where(g => g.Count() < 2).Sum(s => s.Key);
+                    MaxPoint = dices.GroupBy(x => x).Where(g => g.Count() == 1).Max(s => s.Key);
                     break;
 
                 default:
                     Type = DiceType.NoPoint;
                     Points = 0;
                     break;
-
             }
         }
     }

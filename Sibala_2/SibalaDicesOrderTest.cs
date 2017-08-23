@@ -32,11 +32,11 @@ namespace Sibala_2
                 new Dice(new[] {1, 2, 3, 4})
             };
 
-            Assert.IsTrue(input[0].DiceList.SequenceEqual(expected[0].DiceList));
-            Assert.IsTrue(input[1].DiceList.SequenceEqual(expected[1].DiceList));
-            Assert.IsTrue(input[2].DiceList.SequenceEqual(expected[2].DiceList));
-            Assert.IsTrue(input[3].DiceList.SequenceEqual(expected[3].DiceList));
-            Assert.IsTrue(input[4].DiceList.SequenceEqual(expected[4].DiceList));
+            Assert.IsTrue(input[0].dices.SequenceEqual(expected[0].dices));
+            Assert.IsTrue(input[1].dices.SequenceEqual(expected[1].dices));
+            Assert.IsTrue(input[2].dices.SequenceEqual(expected[2].dices));
+            Assert.IsTrue(input[3].dices.SequenceEqual(expected[3].dices));
+            Assert.IsTrue(input[4].dices.SequenceEqual(expected[4].dices));
         }
     }
 }
